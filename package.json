@@ -1,0 +1,16 @@
+{
+  "name": "node-crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start:dev": "node src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tatyana404/node-crud-api"
+  },
+  "keywords": ["nodejs", "tatyana404"],
+  "author": "tatyana404",
+  "license": "ISC"
+}
