@@ -1,0 +1,8 @@
+PUT http://localhost:5000/api/users/f4a4325a-3710-4feb-8416-4d1636b646f1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "username":"Testovich" ,
+  "age":39,
+  "hobbies":["singing","playing guitar"]
+} 
