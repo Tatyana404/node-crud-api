@@ -1,6 +1,7 @@
 import { IncomingMessage } from 'http'
 import { v4 as uuidv4 } from 'uuid'
-import { User } from '../interface/user'
+import { userVerification } from './../util/user'
+import { User } from './../interface/user'
 
 let users: User[] = []
 
@@ -30,9 +31,11 @@ export const create = (req: IncomingMessage) => new Promise((res, rej) => {
       req.on('end', () => {
         newUser = { id: uuidv4(), ...JSON.parse(body) }
 
-        if (['id', 'username', 'age', 'hobbies'].every((field: string) => field in newUser)) {
-          users.push(newUser)
-          res(newUser)
+        const isValidUser = userVerification(newUser)
+
+        if (isValidUser) {
+          users.push(isValidUser)
+          res(isValidUser)
         } else {
           res(false)
         }
@@ -52,10 +55,12 @@ export const update = (req: IncomingMessage, userId: string) => new Promise((res
       req.on('end', () => {
         updateUser = { id: userId, ...JSON.parse(body) }
 
-        if (['username', 'age', 'hobbies'].every((field: string) => field in updateUser)) {
+        const isValidUser = userVerification(updateUser)
+
+        if (isValidUser) {
           const index = users.findIndex(({ id }) => id === userId)
-          users[index] = updateUser
-          res(updateUser)
+          users[index] = isValidUser
+          res(isValidUser)
         } else {
           res(false)
         }
